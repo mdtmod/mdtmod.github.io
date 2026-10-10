@@ -1,156 +1,461 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Mdt Mod</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="HimLQ" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://anhtuanaov.com/" />
-    <link rel="icon" href="https://anhtuanaov.com/uploads/intro/1780035315_3031f1fc81d53f5d.png" type="image/png" />
-    <link rel="shortcut icon" href="https://anhtuanaov.com/uploads/intro/1780035315_3031f1fc81d53f5d.png" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="https://anhtuanaov.com/uploads/intro/1780035315_3031f1fc81d53f5d.png" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="vthangios" />
-    <meta property="og:url" content="https://anhtuanaov.com/" />
-    <meta property="og:title" content="Him" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Him" />
-    <meta name="twitter:description" content="" />
-    <link rel="preload" as="image" href="https://anhtuanaov.com/uploads/intro/1780035327_92260437f19d55cd.jpg" fetchpriority="high" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://anhtuanaov.com/assets/css/style.2.0.css?v=1778152494" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>KeyDrop - Nhận Key Miễn Phí</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #0b1020;
+      --panel: #141c30;
+      --border: #28344d;
+      --text: #f2f5ff;
+      --muted: #98a6c2;
+      --accent: #8b9cff;
+      --green: #55e0ad;
+      --red: #ff7e91;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at top, #1d2c50, transparent 60%),
+        var(--bg);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 14px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 21px;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      color: #10172a;
+      background: var(--accent);
+    }
+
+    main {
+      max-width: 560px;
+      margin: 35px auto;
+    }
+
+    .hero { text-align: center; margin-bottom: 28px; }
+
+    .tag {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 8vw, 44px);
+      letter-spacing: -1.5px;
+      margin: 12px 0;
+    }
+
+    .muted { color: var(--muted); }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 20px 60px #0002;
+    }
+
+    .balance {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .balance-label { font-size: 13px; color: var(--muted); }
+
+    .number {
+      font-size: 38px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 7px 10px;
+      color: var(--green);
+      background: #55e0ad12;
+      border: 1px solid #55e0ad44;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .progress {
+      height: 6px;
+      margin: 18px 0 24px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #ffffff12;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      transition: width .3s;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+      transition: opacity .2s, transform .2s;
+    }
+
+    button:active { transform: scale(.98); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+
+    .primary {
+      width: 100%;
+      background: var(--accent);
+      color: #10172a;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 17px;
+      border: 1px solid #55e0ad55;
+      border-radius: 14px;
+      background: #55e0ad08;
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .key {
+      color: var(--green);
+      font-family: ui-monospace, monospace;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+      line-height: 1.7;
+    }
+
+    .copy {
+      width: 100%;
+      margin-top: 14px;
+      color: var(--text);
+      background: #ffffff10;
+      border: 1px solid var(--border);
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 13px;
+      border-radius: 12px;
+      background: #ffffff08;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .error { color: var(--red); }
+    .success { color: var(--green); }
+    .hidden { display: none; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stat {
+      padding: 15px 10px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      text-align: center;
+      min-width: 0;
+    }
+
+    .stat-label { font-size: 11px; color: var(--muted); }
+    .stat-number { font-size: 23px; font-weight: 800; margin-top: 7px; }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 400px) {
+      body { padding: 14px; }
+      .panel { padding: 18px; }
+      .stats { gap: 7px; }
+      .stat { padding: 13px 5px; }
+      .stat-number { font-size: 20px; }
+    }
+  </style>
 </head>
+
 <body>
-    <main role="main">
-        <!-- NAV -->
-        <nav class="vthangios-nav" aria-label="Điều hướng chính">
-            <button class="vthangios-bell-btn" id="vthangios-bell-btn" aria-label="Thông báo">
-                <i class="fas fa-bell"></i>
-                            </button>
-            <button class="vthangios-theme-btn" id="vthangios-theme-toggle" onclick="vtToggleTheme()" aria-label="Chuyển chế độ tối/sáng">
-                <i class="fas fa-moon" id="vthangios-theme-icon"></i>
-            </button>
-        </nav>
+  <header>
+    <div class="logo">K</div>
+    <span>Key Aov Mod</span>
+  </header>
 
-        <!-- NOTIFICATION POPUP -->
-        <div id="vthangios-notif-overlay" class="vthangios-notif-overlay" onclick="vtCloseNotif(event)"></div>
-        <div id="vthangios-notif-panel" class="vthangios-notif-panel">
-            <div class="vthangios-notif-header">
-                <span><i class="fas fa-bell"></i> Thông Báo</span>
-                <button onclick="vtCloseNotif()" class="vthangios-notif-close"><i class="fas fa-xmark"></i></button>
-            </div>
-            <div class="vthangios-notif-body">
-                                <div class="vthangios-notif-empty"><i class="fas fa-bell-slash"></i><br>Chưa có thông báo</div>
-                            </div>
+  <main>
+    <section class="hero">
+      <div class="tag">Timi Map LQ</div>
+      <h1>Nhận key của bạn.</h1>
+      <p class="muted">
+        Nhận một key ngẫu nhiên mỗi ngày.
+        Nhanh chóng, đơn giản và miễn phí.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="balance">
+        <div>
+          <div class="balance-label">Key còn trong kho</div>
+          <div class="number" id="remaining">0</div>
         </div>
+        <div class="badge" id="status">● Sẵn sàng</div>
+      </div>
 
-        <!-- AVATAR -->
-        <div class="vthangios-avatar-wrap">
-            <img class="vthangios-avatar" src="https://i.ibb.co/ccTVS8ty/IMG-0156.png" alt="Ảnh đại diện Anh Tuấn AOV" fetchpriority="high" width="120" height="120">
-        </div>
+      <div class="progress">
+        <div class="progress-bar" id="progress"></div>
+      </div>
 
-        <!-- NAME & HEADLINE -->
-        <p class="vthangios-iam">Hi, i am</p>
-        <h1 class="vthangios-name">
-            MdtMod   <img class="vthangios-verify" src="https://anhtuanaov.com/assets/img/verify.png" alt="verified" width="27" height="27">
-        </h1>
-        <p class="vthangios-headline">and I'm a <span id="typed-text" class="vthangios-gradient-text"></span></p>
+      <button class="primary" id="claimBtn">
+        Nhận key ngẫu nhiên
+      </button>
 
-        <!-- SOCIALS -->
-    
-        <!-- CATEGORY TABS -->
-            
-        </div>
+      <div class="result hidden" id="result" aria-live="polite">
+        <div class="result-label">KEY CỦA BẠN</div>
+        <div class="key" id="keyValue"></div>
+        <button class="copy" id="copyBtn">Sao chép key</button>
+      </div>
 
-        <!-- APP GROUPS -->
-        <section class="vthangios-app-section" aria-label="Danh sách ứng dụng">
-                            <div class="vthangios-group-block" id="group-8">
-                <h2 class="vthangios-section-title">
-                    Tải Game (Vượt 1 Lần)                                    </h2>
-                                <div class="vthangios-app-list">
-                                            <div class="vthangios-app-item">
-                            <div class="vthangios-app-info">
-                                <img src="https://anhtuanaov.com//uploads/apps/1780037963_bfda0890060a65e0.jpeg" alt="Menu Hack Map Chấp Tố" width="58" height="58" loading="lazy">
-                                <div>
-                                    <span class="vthangios-app-name">
-                                        Menu Hack Map Chấp Tố                                    </span>
-                                                                            <span class="vthangios-app-desc">
-                                           Dành Cho Thiết Bị iOS                                        </span>
-                                                                    </div>
-                            </div>
-                            <button class="vthangios-download-btn " aria-label="Tải xuống Menu Hack Map Chấp Tố" onclick="window.open('https://oklink2.online/UbSF8','_blank')">
-                                <span class="svg-icon"></span>
-                            </button>
-                        </div>
-                                          
-                                <div>
-                     
-                            </button>
-                        </div>
-                                
-                            </button>
-                        </div>
-                                    </div><!-- /.vthangios-app-list -->
-                </div><!-- /.vthangios-group-block -->
-                            <div class="vthangios-group-block" id="group-9">
-                <h2 class="vthangios-section-title">
-                    Get Key (Vượt 2 Lần)                                    </h2>
-                                <div class="vthangios-app-list">
-                                            <div class="vthangios-app-item">
-                            <div class="vthangios-app-info">
-                                <img src="https://anhtuanaov.com//uploads/apps/1780037963_bfda0890060a65e0.jpeg" alt="Get Key Map Chấp Tố" width="58" height="58" loading="lazy">
-                                <div>
-                                    <span class="vthangios-app-name">
-                                        Get Key Hack Map iOS                                    </span>
-                                                                            <span class="vthangios-auto-time"></span>
-                                                                    </div>
-                            </div>
-                            <button class="vthangios-download-btn " aria-label="Tải xuống Get Key Map Chấp Tố" onclick="window.open('https://oklink2.online/ijQ','_blank')">
-                                <span class="svg-icon"></span>
-                            </button>
-                        </div>
-                                          
-                            </button>
-                        </div>
-                                         
-                            </button>
-                        </div>
-                                    </div><!-- /.vthangios-app-list -->
-                </div><!-- /.vthangios-group-block -->
-                    </section>
+      <div class="message hidden" id="message" role="status"></div>
+    </section>
 
-        <!-- WAVE -->
-        <div id="wave-placeholder"></div>
-        
-        <audio id="bgMusic" playsinline>
-            <source src="home.mp3" type="audio/mpeg">
-        </audio>
-        
-        <script>
-        const audio = document.getElementById("bgMusic");
-        
-        function startMusic() {
-            audio.play().catch(err => console.log(err));
-        
-            document.removeEventListener("touchstart", startMusic);
-            document.removeEventListener("click", startMusic);
-        }
-        
-        document.addEventListener("touchstart", startMusic);
-        document.addEventListener("click", startMusic);
-        </script>
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-label">Tổng key</div>
+        <div class="stat-number" id="total">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Đã phát</div>
+        <div class="stat-number" id="issued">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Hôm nay</div>
+        <div class="stat-number" id="today">0</div>
+      </div>
+    </section>
 
-        <!-- FOOTER -->
-        <footer class="vthangios-footer">
-            &copy; Developed By Mdt 2026
-        </footer>
-    </main>
-    <script src="https://anhtuanaov.com/assets/js/main.2.0.js?v=1780042982"></script>
+    <footer>
+      Timi Aov · Hệ thống phân phối key hằng ngày<br>
+      Mỗi thiết bị tối đa một key mỗi ngày.
+    </footer>
+  </main>
+
+  <script>
+    /*
+      THÊM KEY TẠI ĐÂY:
+      Mỗi key đặt trong dấu nháy, cách nhau bằng dấu phẩy.
+    */
+    const KEYS = [
+      "DEMO-KEY-001",
+      "DEMO-KEY-002",
+      "DEMO-KEY-003",
+      "DEMO-KEY-004",
+      "DEMO-KEY-005"
+    ];
+
+    const $ = id => document.getElementById(id);
+    const STORAGE_KEY = "keydrop_claim_history_v1";
+
+    function today() {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Ho_Chi_Minh",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(new Date());
+
+      const p = Object.fromEntries(parts.map(x => [x.type, x.value]));
+      return `${p.year}-${p.month}-${p.day}`;
+    }
+
+    function readHistory() {
+      try {
+        const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        return value && typeof value === "object" &&
+          !Array.isArray(value) ? value : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveHistory(history) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    }
+
+    function claimedKeys(history) {
+      return new Set(Object.values(history).flatMap(v =>
+        Array.isArray(v) ? v : []
+      ));
+    }
+
+    function availableKeys() {
+      const history = readHistory();
+      const claimed = claimedKeys(history);
+      return KEYS.filter(k => !claimed.has(k));
+    }
+
+    function showMessage(text, type = "") {
+      const el = $("message");
+      el.textContent = text;
+      el.className = `message ${type}`;
+    }
+
+    function updateUI() {
+      const history = readHistory();
+      const available = availableKeys();
+      const issued = KEYS.length - available.length;
+      const todayList = Array.isArray(history[today()])
+        ? history[today()] : [];
+
+      $("remaining").textContent = available.length;
+      $("total").textContent = KEYS.length;
+      $("issued").textContent = issued;
+      $("today").textContent = todayList.length;
+
+      $("progress").style.width = KEYS.length
+        ? `${issued / KEYS.length * 100}%`
+        : "0%";
+
+      $("claimBtn").disabled =
+        available.length === 0 || todayList.length > 0;
+
+      if (available.length === 0) {
+        $("status").textContent = "● Hết key";
+        $("claimBtn").textContent = "Kho key đã hết";
+      } else if (todayList.length > 0) {
+        $("status").textContent = "● Đã nhận hôm nay";
+        $("claimBtn").textContent = "Bạn đã nhận key hôm nay";
+      } else {
+        $("status").textContent = "● Sẵn sàng";
+        $("claimBtn").textContent = "Nhận key ngẫu nhiên";
+      }
+    }
+
+    $("claimBtn").addEventListener("click", () => {
+      const history = readHistory();
+      const day = today();
+
+      if (!Array.isArray(history[day])) history[day] = [];
+
+      if (history[day].length > 0) {
+        showMessage("Bạn đã nhận key hôm nay. Hãy quay lại vào ngày mai.");
+        updateUI();
+        return;
+      }
+
+      const available = availableKeys();
+
+      if (available.length === 0) {
+        showMessage("Kho key đã hết. Vui lòng quay lại sau.", "error");
+        updateUI();
+        return;
+      }
+
+      const key = available[Math.floor(Math.random() * available.length)];
+
+      history[day].push(key);
+
+      try {
+        saveHistory(history);
+      } catch {
+        showMessage(
+          "Không thể lưu lịch sử trên trình duyệt này. Hãy bật lưu trữ trang web rồi thử lại.",
+          "error"
+        );
+        return;
+      }
+
+      $("keyValue").textContent = key;
+      $("result").classList.remove("hidden");
+      showMessage("Nhận key thành công! Hãy sao chép và lưu key của bạn.", "success");
+      updateUI();
+    });
+
+    $("copyBtn").addEventListener("click", async () => {
+      const key = $("keyValue").textContent;
+
+      try {
+        await navigator.clipboard.writeText(key);
+        $("copyBtn").textContent = "Đã sao chép!";
+      } catch {
+        const area = document.createElement("textarea");
+        area.value = key;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+
+        const success = document.execCommand("copy");
+        area.remove();
+
+        $("copyBtn").textContent = success
+          ? "Đã sao chép!"
+          : "Hãy sao chép key thủ công";
+      }
+
+      setTimeout(() => {
+        $("copyBtn").textContent = "Sao chép key";
+      }, 1800);
+    });
+
+    // Hiện lại key đã nhận trong ngày hiện tại.
+    function restoreTodayKey() {
+      const history = readHistory();
+      const keys = history[today()];
+
+      if (Array.isArray(keys) && keys.length > 0) {
+        $("keyValue").textContent = keys[keys.length - 1];
+        $("result").classList.remove("hidden");
+        showMessage("Bạn đã nhận key hôm nay.", "success");
+      }
+    }
+
+    restoreTodayKey();
+    updateUI();
+  </script>
 </body>
 </html>
